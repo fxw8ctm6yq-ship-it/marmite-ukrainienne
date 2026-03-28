@@ -619,34 +619,11 @@
       background: white;
     }
 
-    .news-toolbar {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 2.5rem;
-    }
+    
 
-    .news-add-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      padding: 0.75rem 2rem;
-      background: var(--yellow);
-      color: var(--blue-dark);
-      font-family: 'Crimson Pro', serif;
-      font-size: 1rem;
-      font-weight: 700;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      box-shadow: 0 4px 16px rgba(245,200,0,0.35);
-      transition: all 0.2s;
-      letter-spacing: 0.04em;
-    }
+    
 
-    .news-add-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(245,200,0,0.5);
-    }
+    
 
     .news-grid {
       max-width: 1000px;
@@ -722,134 +699,13 @@
       line-height: 1.6;
     }
 
-    .news-card-delete {
-      position: absolute;
-      top: 10px; right: 10px;
-      width: 26px; height: 26px;
-      background: rgba(0,0,0,0.08);
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 0.75rem;
-      color: #888;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s, color 0.2s;
-      line-height: 1;
-    }
+    
 
-    .news-card-delete:hover { background: #fde8e8; color: #c0392b; }
+    
 
-    .news-empty {
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: 3rem 1rem;
-      color: #bbb;
-      font-style: italic;
-      font-size: 1.1rem;
-    }
+    
 
-    /* News Modal */
-    .news-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.65);
-      z-index: 999;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .news-overlay.active { display: flex; }
-
-    .news-modal {
-      background: white;
-      border-radius: 20px;
-      padding: 2rem;
-      max-width: 480px;
-      width: 92%;
-      border-top: 5px solid var(--blue);
-      animation: modalIn 0.3s ease;
-    }
-
-    .news-modal h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
-      color: var(--blue-dark);
-      margin-bottom: 1.3rem;
-    }
-
-    .news-field {
-      margin-bottom: 1rem;
-    }
-
-    .news-field label {
-      display: block;
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      color: var(--blue-dark);
-      margin-bottom: 0.35rem;
-    }
-
-    .news-field input,
-    .news-field textarea,
-    .news-field select {
-      width: 100%;
-      padding: 0.65rem 0.9rem;
-      border: 2px solid rgba(26,86,176,0.2);
-      border-radius: 10px;
-      font-family: 'Crimson Pro', serif;
-      font-size: 1rem;
-      color: var(--text-dark);
-      background: var(--cream);
-      transition: border 0.2s;
-      outline: none;
-    }
-
-    .news-field input:focus,
-    .news-field textarea:focus,
-    .news-field select:focus { border-color: var(--blue); }
-
-    .news-field textarea { resize: vertical; min-height: 90px; }
-
-    .news-modal-actions {
-      display: flex;
-      gap: 0.8rem;
-      margin-top: 1.5rem;
-    }
-
-    .btn-primary {
-      flex: 1;
-      padding: 0.75rem;
-      background: var(--blue);
-      color: white;
-      border: none;
-      border-radius: 30px;
-      font-family: 'Crimson Pro', serif;
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .btn-primary:hover { background: var(--blue-dark); }
-
-    .btn-cancel {
-      padding: 0.75rem 1.5rem;
-      background: none;
-      border: 2px solid rgba(26,86,176,0.2);
-      border-radius: 30px;
-      font-family: 'Crimson Pro', serif;
-      font-size: 1rem;
-      color: var(--text-mid);
-      cursor: pointer;
-      transition: border 0.2s;
-    }
-
-    .btn-cancel:hover { border-color: var(--blue); }
+    
 
     /* ===== À EMPORTER ===== */
     .takeaway {
@@ -1427,25 +1283,6 @@
   <p style="margin-top:1rem; font-size:0.75rem; opacity:0.5;">© 2025 À La Marmite Ukrainienne · Tous droits réservés</p>
 </footer>
 
-    <div class="news-field">
-      <label>Titre</label>
-      <input type="text" id="newsTitle" placeholder="Ex : Soirée Saint-Valentin 💕"/>
-    </div>
-    <div class="news-field">
-      <label>Date / Période</label>
-      <input type="text" id="newsDate" placeholder="Ex : 14 fév. 2026"/>
-    </div>
-    <div class="news-field">
-      <label>Description</label>
-      <textarea id="newsText" placeholder="Décrivez l'actualité en quelques mots…"></textarea>
-    </div>
-    <div class="news-modal-actions">
-      <button class="btn-primary" onclick="saveNews()">✅ Publier</button>
-      <button class="btn-cancel" onclick="closeNewsModal()">Annuler</button>
-    </div>
-  </div>
-</div>
-
 
 <div class="upload-overlay" id="uploadOverlay">
   <div class="upload-modal">
@@ -1517,72 +1354,6 @@
     if (e.target === this) closeModal();
   });
 
-  // ===== ACTUALITÉS =====
-  let newsCounter = 100;
-  const tagLabels = {
-    "tag-evenement": "Événement",
-    "tag-fermeture": "Fermeture",
-    "tag-promo": "Promotion",
-    "tag-info": "Info"
-  };
-
-  function openNewsModal() {
-    document.getElementById("newsOverlay").classList.add("active");
-  }
-
-  function closeNewsModal() {
-    document.getElementById("newsOverlay").classList.remove("active");
-    document.getElementById("newsTitle").value = "";
-    document.getElementById("newsDate").value = "";
-    document.getElementById("newsText").value = "";
-  }
-
-  function saveNews() {
-    const type  = document.getElementById("newsType").value;
-    const title = document.getElementById("newsTitle").value.trim();
-    const date  = document.getElementById("newsDate").value.trim();
-    const text  = document.getElementById("newsText").value.trim();
-    if (!title) { alert("Veuillez entrer un titre."); return; }
-    const id = "news-" + (++newsCounter);
-    const card = document.createElement("div");
-    card.className = "news-card";
-    card.dataset.id = id;
-    card.innerHTML = `
-      <div class="news-card-header">
-        <span class="news-tag ${type}">${tagLabels[type] || "Info"}</span>
-        ${date ? `<span class="news-card-date">${date}</span>` : ""}
-      </div>
-      <div class="news-card-body">
-        <div class="news-card-title">${title}</div>
-        ${text ? `<div class="news-card-text">${text}</div>` : ""}
-      </div>
-    `;
-    const empty = document.querySelector(".news-empty");
-    if (empty) empty.remove();
-    const newsGrid = document.getElementById("newsGrid");
-    newsGrid.insertBefore(card, newsGrid.firstChild);
-    closeNewsModal();
-  }
-
-  function deleteNews(id) {
-    const card = document.querySelector("[data-id='" + id + "']");
-    if (card) {
-      card.style.transition = "opacity 0.3s, transform 0.3s";
-      card.style.opacity = "0";
-      card.style.transform = "scale(0.9)";
-      setTimeout(() => {
-        card.remove();
-        const newsGrid = document.getElementById("newsGrid");
-        if (newsGrid.children.length === 0) {
-          newsGrid.innerHTML = "<div class=\"news-empty\">Aucune actualité pour le moment. Ajoutez-en une ! 📢</div>";
-        }
-      }, 300);
-    }
-  }
-
-  document.getElementById("newsOverlay").addEventListener("click", function(e) {
-    if (e.target === this) closeNewsModal();
-  });
 </script>
 </body>
 </html>
