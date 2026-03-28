@@ -1173,7 +1173,7 @@
   <h2 class="section-title">Notre <span>Galerie</span></h2>
   <div class="section-divider"><span class="section-divider-icon">📸</span></div>
   <p class="gallery-intro">
-    Cliquez sur le <strong>+</strong> pour ajouter vos propres photos — plats, ambiance, événements…
+    Découvrez nos plats et notre ambiance en images.
   </p>
   <div class="gallery-grid" id="galleryGrid">
     <!-- 6 placeholder slots -->
@@ -1222,11 +1222,6 @@
 <section class="news" id="actualites">
   <h2 class="section-title">Nos <span>Actualités</span></h2>
   <div class="section-divider"><span class="section-divider-icon">📢</span></div>
-  <div class="news-toolbar">
-    <button class="news-add-btn" onclick="openNewsModal()">
-      ✏️ Ajouter une actualité
-    </button>
-  </div>
   <div class="news-grid" id="newsGrid">
     <!-- Example cards pre-loaded -->
     <div class="news-card" data-id="demo1">
@@ -1238,7 +1233,6 @@
         <div class="news-card-title">Fermé pour Noël 🎄</div>
         <div class="news-card-text">Le restaurant sera exceptionnellement fermé le 25 et 26 décembre. Joyeuses fêtes à tous !</div>
       </div>
-      <button class="news-card-delete" title="Supprimer" onclick="deleteNews('demo1')">✕</button>
     </div>
     <div class="news-card" data-id="demo2">
       <div class="news-card-header">
@@ -1249,7 +1243,6 @@
         <div class="news-card-title">Saint-Valentin 💕</div>
         <div class="news-card-text">Soirée spéciale Saint-Valentin ! Menu romantique aux chandelles. Réservation conseillée.</div>
       </div>
-      <button class="news-card-delete" title="Supprimer" onclick="deleteNews('demo2')">✕</button>
     </div>
     <div class="news-card" data-id="demo3">
       <div class="news-card-header">
@@ -1260,7 +1253,6 @@
         <div class="news-card-title">Menu du midi à prix doux 🌞</div>
         <div class="news-card-text">Découvrez notre formule midi : entrée + plat ou plat + dessert à prix réduit. Du mardi au vendredi.</div>
       </div>
-      <button class="news-card-delete" title="Supprimer" onclick="deleteNews('demo3')">✕</button>
     </div>
   </div>
 </section>
@@ -1435,19 +1427,6 @@
   <p style="margin-top:1rem; font-size:0.75rem; opacity:0.5;">© 2025 À La Marmite Ukrainienne · Tous droits réservés</p>
 </footer>
 
-<!-- NEWS MODAL -->
-<div class="news-overlay" id="newsOverlay">
-  <div class="news-modal">
-    <h3>📢 Nouvelle actualité</h3>
-    <div class="news-field">
-      <label>Type</label>
-      <select id="newsType">
-        <option value="tag-evenement">🎉 Événement</option>
-        <option value="tag-fermeture">🔒 Fermeture exceptionnelle</option>
-        <option value="tag-promo">🎁 Promotion</option>
-        <option value="tag-info">ℹ️ Information</option>
-      </select>
-    </div>
     <div class="news-field">
       <label>Titre</label>
       <input type="text" id="newsTitle" placeholder="Ex : Soirée Saint-Valentin 💕"/>
@@ -1499,7 +1478,6 @@
         <div class="gallery-placeholder-text">Ajoutez une photo<br><em>${label}</em></div>
       </div>
       <div class="gallery-item-label">${label}</div>
-      <button class="gallery-add-btn" title="Ajouter une photo" onclick="openModal(${i})">+</button>
     `;
     grid.appendChild(item);
   });
@@ -1578,7 +1556,6 @@
         <div class="news-card-title">${title}</div>
         ${text ? `<div class="news-card-text">${text}</div>` : ""}
       </div>
-      <button class="news-card-delete" title="Supprimer" onclick="deleteNews(\'${id}\')">✕</button>
     `;
     const empty = document.querySelector(".news-empty");
     if (empty) empty.remove();
