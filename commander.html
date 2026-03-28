@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Commander à emporter – À La Marmite Ukrainienne</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Crimson+Pro:wght@300;400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --blue: #1a56b0;
+      --blue-dark: #0d3a7a;
+      --blue-light: #2c6ed4;
+      --yellow: #f5c800;
+      --cream: #fef9ec;
+      --text-dark: #1a1a2e;
+      --text-mid: #3a3a5c;
+      --cart-width: 340px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Crimson Pro', Georgia, serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      background: var(--blue-dark);
+      border-bottom: 3px solid var(--yellow);
+      padding: 0.9rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .header-back {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    .header-back:hover { color: var(--yellow); }
+
+    .header-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.5rem;
+      color: var(--yellow);
+      text-align: center;
+    }
+
+    .header-cart-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--yellow);
+      color: var(--blue-dark);
+      border: none;
+      border-radius: 30px;
+      padding: 0.5rem 1.2rem;
+      font-family: 'Crimson Pro', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .header-cart-btn:hover { background: #ffe033; transform: translateY(-1px); }
+
+    .cart-badge {
+      background: var(--blue-dark);
+      color: white;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    /* ===== LAYOUT ===== */
+    .page-layout {
+      display: flex;
+      min-height: calc(100vh - 60px);
+    }
+
+    /* ===== MENU PANEL ===== */
+    .menu-panel {
+      flex: 1;
+      padding: 2rem;
+      overflow-y: auto;
+    }
+
+    .order-banner {
+      background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+      border-radius: 16px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .order-banner h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: white;
+    }
+
+    .order-banner p { font-size: 0.9rem; color: rgba(255,255,255,0.75); margin-top: 0.25rem; }
+
+    .order-info-pills {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .order-pill {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 0.35rem 0.9rem;
+      font-size: 0.82rem;
+      color: white;
+    }
+
+    /* Category tabs */
+    .cat-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .cat-tab {
+      padding: 0.5rem 1.2rem;
+      border-radius: 30px;
+      border: 2px solid rgba(26,86,176,0.2);
+      background: white;
+      font-family: 'Crimson Pro', serif;
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .cat-tab.active, .cat-tab:hover {
+      background: var(--blue);
+      color: white;
+      border-color: var(--blue);
+    }
+
+    /* Category sections */
+    .cat-section { margin-bottom: 2.5rem; }
+
+    .cat-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--blue-dark);
+      margin-bottom: 1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 2px solid var(--yellow);
+    }
+
+    .cat-title-icon { font-size: 1.4rem; }
+
+    /* Dish cards */
+    .dish-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .dish-card {
+      background: white;
+      border-radius: 16px;
+      border: 1.5px solid rgba(26,86,176,0.1);
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dish-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(26,86,176,0.12);
+    }
+
+    .dish-card-body { padding: 1rem 1.2rem; flex: 1; }
+
+    .dish-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .dish-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--blue-dark);
+      line-height: 1.3;
+    }
+
+    .dish-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--blue);
+      font-weight: 700;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .dish-desc {
+      font-size: 0.85rem;
+      color: var(--text-mid);
+      line-height: 1.5;
+      font-style: italic;
+      margin-bottom: 0.5rem;
+    }
+
+    .dish-badges { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.75rem; }
+
+    .dish-badge {
+      padding: 0.15rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-pop  { background: #fef3cd; color: #9b6a00; }
+    .badge-vege { background: #e8f5e9; color: #2e7d32; }
+    .badge-chef { background: #e3f0ff; color: #1a56b0; }
+
+    .dish-card-footer {
+      padding: 0.75rem 1.2rem;
+      border-top: 1px solid rgba(26,86,176,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(254,249,236,0.6);
+    }
+
+    .qty-control {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .qty-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(26,86,176,0.2);
+      background: white;
+      font-size: 1.1rem;
+      color: var(--blue);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+      line-height: 1;
+    }
+
+    .qty-btn:hover { background: var(--blue); color: white; border-color: var(--blue); }
+
+    .qty-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--blue-dark);
+      min-width: 24px;
+      text-align: center;
+    }
+
+    .add-to-cart-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1.2rem;
+      background: var(--blue);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-family: 'Crimson Pro', serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .add-to-cart-btn:hover { background: var(--blue-dark); transform: translateY(-1px); }
+    .add-to-cart-btn.added { background: #2e7d32; }
+
+    /* ===== CART SIDEBAR ===== */
+    .cart-sidebar {
+      width: var(--cart-width);
+      background: white;
+      border-left: 2px solid rgba(26,86,176,0.1);
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 60px;
+      height: calc(100vh - 60px);
+      overflow: hidden;
+    }
+
+    .cart-header {
+      background: var(--blue-dark);
+      padding: 1.2rem 1.5rem;
+      border-bottom: 3px solid var(--yellow);
+    }
+
+    .cart-header h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: white;
+    }
+
+    .cart-header p { font-size: 0.82rem; color: rgba(255,255,255,0.65); margin-top: 0.2rem; }
+
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem;
+    }
+
+    .cart-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      color: #ccc;
+      gap: 0.75rem;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .cart-empty-icon { font-size: 3rem; opacity: 0.3; }
+    .cart-empty p { font-size: 0.95rem; font-style: italic; }
+
+    .cart-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(26,86,176,0.08);
+      animation: slideIn 0.2s ease;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(10px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    .cart-item-info { flex: 1; }
+
+    .cart-item-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--blue-dark);
+      line-height: 1.3;
+    }
+
+    .cart-item-price { font-size: 0.85rem; color: var(--text-mid); margin-top: 0.2rem; }
+
+    .cart-item-qty {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .cart-qty-btn {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1px solid rgba(26,86,176,0.2);
+      background: var(--cream);
+      font-size: 1rem;
+      color: var(--blue);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      transition: all 0.15s;
+    }
+
+    .cart-qty-btn:hover { background: var(--blue); color: white; }
+
+    .cart-qty-num {
+      font-weight: 700;
+      font-size: 0.9rem;
+      min-width: 20px;
+      text-align: center;
+      color: var(--blue-dark);
+    }
+
+    .cart-item-total {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--blue);
+      white-space: nowrap;
+    }
+
+    /* Cart footer */
+    .cart-footer {
+      border-top: 2px solid rgba(26,86,176,0.1);
+      padding: 1rem 1.2rem;
+    }
+
+    .cart-summary {
+      margin-bottom: 1rem;
+    }
+
+    .cart-summary-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      margin-bottom: 0.4rem;
+    }
+
+    .cart-total-row {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--blue-dark);
+      font-weight: 700;
+      padding-top: 0.5rem;
+      border-top: 1px solid rgba(26,86,176,0.1);
+      margin-top: 0.5rem;
+    }
+
+    .checkout-btn {
+      display: block;
+      width: 100%;
+      padding: 0.9rem;
+      background: var(--blue);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-family: 'Crimson Pro', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+      margin-bottom: 0.5rem;
+    }
+
+    .checkout-btn:hover { background: var(--blue-dark); transform: translateY(-2px); }
+    .checkout-btn:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+
+    .cart-note {
+      font-size: 0.75rem;
+      color: #aaa;
+      text-align: center;
+      font-style: italic;
+    }
+
+    /* ===== CHECKOUT MODAL ===== */
+    .checkout-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .checkout-overlay.active { display: flex; }
+
+    .checkout-modal {
+      background: white;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 520px;
+      max-height: 90vh;
+      overflow-y: auto;
+      border-top: 5px solid var(--blue);
+      animation: modalIn 0.3s ease;
+    }
+
+    @keyframes modalIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+
+    .checkout-modal-header {
+      padding: 1.5rem 1.5rem 1rem;
+      border-bottom: 1px solid rgba(26,86,176,0.1);
+    }
+
+    .checkout-modal-header h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--blue-dark);
+    }
+
+    .checkout-modal-header p {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      margin-top: 0.3rem;
+    }
+
+    .checkout-modal-body { padding: 1.2rem 1.5rem; }
+
+    .checkout-order-recap {
+      background: var(--cream);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(26,86,176,0.1);
+    }
+
+    .checkout-order-recap h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--blue-dark);
+      margin-bottom: 0.75rem;
+    }
+
+    .recap-item {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      padding: 0.3rem 0;
+      border-bottom: 1px dashed rgba(26,86,176,0.08);
+    }
+
+    .recap-item:last-child { border-bottom: none; }
+
+    .recap-total {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--blue-dark);
+      font-weight: 700;
+      margin-top: 0.75rem;
+      padding-top: 0.5rem;
+      border-top: 2px solid rgba(26,86,176,0.15);
+    }
+
+    .form-field { margin-bottom: 1rem; }
+
+    .form-field label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--blue-dark);
+      margin-bottom: 0.35rem;
+    }
+
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      border: 2px solid rgba(26,86,176,0.2);
+      border-radius: 10px;
+      font-family: 'Crimson Pro', serif;
+      font-size: 1rem;
+      color: var(--text-dark);
+      background: var(--cream);
+      outline: none;
+      transition: border 0.2s;
+    }
+
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus { border-color: var(--blue); }
+
+    .form-field textarea { resize: vertical; min-height: 70px; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    .submit-btn {
+      display: block;
+      width: 100%;
+      padding: 1rem;
+      background: var(--blue);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-family: 'Crimson Pro', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: 1rem;
+    }
+
+    .submit-btn:hover { background: var(--blue-dark); }
+
+    .cancel-btn {
+      display: block;
+      width: 100%;
+      padding: 0.7rem;
+      background: none;
+      border: none;
+      font-family: 'Crimson Pro', serif;
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      cursor: pointer;
+      margin-top: 0.5rem;
+      text-decoration: underline;
+    }
+
+    /* ===== SUCCESS ===== */
+    .success-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .success-overlay.active { display: flex; }
+
+    .success-modal {
+      background: white;
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      max-width: 420px;
+      width: 90%;
+      text-align: center;
+      border-top: 5px solid #2e7d32;
+      animation: modalIn 0.3s ease;
+    }
+
+    .success-icon { font-size: 4rem; margin-bottom: 1rem; }
+
+    .success-modal h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--blue-dark);
+      margin-bottom: 0.75rem;
+    }
+
+    .success-modal p { font-size: 1rem; color: var(--text-mid); line-height: 1.6; }
+
+    .success-back {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.8rem 2rem;
+      background: var(--blue);
+      color: white;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: background 0.2s;
+    }
+
+    .success-back:hover { background: var(--blue-dark); }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 768px) {
+      .cart-sidebar { display: none; }
+      .mobile-cart-bar {
+        display: flex !important;
+        position: fixed;
+        bottom: 0; left: 0; right: 0;
+        background: var(--blue-dark);
+        border-top: 3px solid var(--yellow);
+        padding: 1rem 1.5rem;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 50;
+      }
+      .menu-panel { padding-bottom: 5rem; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    .mobile-cart-bar { display: none; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="index.html" class="header-back">← Retour au site</a>
+  <span class="header-title">La Marmite Ukrainienne</span>
+  <button class="header-cart-btn" onclick="openCheckout()">
+    🛒 Panier
+    <span class="cart-badge" id="header-badge">0</span>
+  </button>
+</header>
+
+<div class="page-layout">
+
+  <!-- MENU PANEL -->
+  <div class="menu-panel">
+
+    <div class="order-banner">
+      <div>
+        <h2>Commander à emporter 🥡</h2>
+        <p>Passez votre commande en ligne, venez récupérer au restaurant.</p>
+      </div>
+      <div class="order-info-pills">
+        <span class="order-pill">⏱️ Prêt en 30 min</span>
+        <span class="order-pill">🏪 Retrait au restaurant</span>
+        <span class="order-pill">💳 Paiement sur place</span>
+      </div>
+    </div>
+
+    <!-- Category tabs -->
+    <div class="cat-tabs">
+      <button class="cat-tab active" onclick="scrollTo('entrees')">🥗 Entrées</button>
+      <button class="cat-tab" onclick="scrollTo('soupes')">🍲 Soupes</button>
+      <button class="cat-tab" onclick="scrollTo('plats')">🍽️ Plats</button>
+      <button class="cat-tab" onclick="scrollTo('desserts')">🍰 Desserts</button>
+      <button class="cat-tab" onclick="scrollTo('boissons')">🥤 Boissons</button>
+    </div>
+
+    <!-- ENTRÉES -->
+    <div class="cat-section" id="entrees">
+      <div class="cat-title"><span class="cat-title-icon">🥗</span> Entrées</div>
+      <div class="dish-grid" id="grid-entrees"></div>
+    </div>
+
+    <!-- SOUPES -->
+    <div class="cat-section" id="soupes">
+      <div class="cat-title"><span class="cat-title-icon">🍲</span> Soupes</div>
+      <div class="dish-grid" id="grid-soupes"></div>
+    </div>
+
+    <!-- PLATS -->
+    <div class="cat-section" id="plats">
+      <div class="cat-title"><span class="cat-title-icon">🍽️</span> Plats principaux</div>
+      <div class="dish-grid" id="grid-plats"></div>
+    </div>
+
+    <!-- DESSERTS -->
+    <div class="cat-section" id="desserts">
+      <div class="cat-title"><span class="cat-title-icon">🍰</span> Desserts</div>
+      <div class="dish-grid" id="grid-desserts"></div>
+    </div>
+
+    <!-- BOISSONS -->
+    <div class="cat-section" id="boissons">
+      <div class="cat-title"><span class="cat-title-icon">🥤</span> Boissons</div>
+      <div class="dish-grid" id="grid-boissons"></div>
+    </div>
+
+  </div>
+
+  <!-- CART SIDEBAR -->
+  <div class="cart-sidebar">
+    <div class="cart-header">
+      <h3>🛒 Mon panier</h3>
+      <p>Récapitulatif de votre commande</p>
+    </div>
+    <div class="cart-items" id="cart-items">
+      <div class="cart-empty">
+        <span class="cart-empty-icon">🥣</span>
+        <p>Votre panier est vide.<br>Ajoutez des plats pour commencer !</p>
+      </div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-summary" id="cart-summary" style="display:none">
+        <div class="cart-summary-row"><span>Sous-total</span><span id="subtotal">0,00€</span></div>
+        <div class="cart-total-row"><span>Total</span><span id="total">0,00€</span></div>
+      </div>
+      <button class="checkout-btn" id="checkout-btn" disabled onclick="openCheckout()">
+        Valider la commande
+      </button>
+      <p class="cart-note">Paiement sur place à la récupération</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- MOBILE CART BAR -->
+<div class="mobile-cart-bar" id="mobile-cart-bar" style="display:none">
+  <span style="color:white; font-size:0.95rem;">🛒 <span id="mobile-count">0</span> article(s)</span>
+  <button onclick="openCheckout()" style="background:var(--yellow); color:var(--blue-dark); border:none; border-radius:30px; padding:0.6rem 1.5rem; font-weight:700; font-family:'Crimson Pro',serif; font-size:1rem; cursor:pointer;">
+    Commander · <span id="mobile-total">0,00€</span>
+  </button>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="checkout-overlay" id="checkoutOverlay">
+  <div class="checkout-modal">
+    <div class="checkout-modal-header">
+      <h3>Finaliser la commande</h3>
+      <p>Remplissez vos coordonnées — nous vous confirmerons par email.</p>
+    </div>
+    <div class="checkout-modal-body">
+      <div class="checkout-order-recap">
+        <h4>📋 Récapitulatif</h4>
+        <div id="recap-items"></div>
+        <div class="recap-total">
+          <span>Total</span>
+          <span id="recap-total">0,00€</span>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label>Prénom *</label>
+          <input type="text" id="f-prenom" placeholder="Marie" required/>
+        </div>
+        <div class="form-field">
+          <label>Nom *</label>
+          <input type="text" id="f-nom" placeholder="Dupont" required/>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>Email * (confirmation envoyée ici)</label>
+        <input type="email" id="f-email" placeholder="marie@exemple.com" required/>
+      </div>
+
+      <div class="form-field">
+        <label>Téléphone *</label>
+        <input type="tel" id="f-tel" placeholder="+32 470 00 00 00" required/>
+      </div>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label>Heure de retrait souhaitée *</label>
+          <select id="f-heure">
+            <option value="">-- Choisir --</option>
+            <option>12h00</option><option>12h30</option>
+            <option>13h00</option><option>13h30</option>
+            <option>14h00</option><option>18h00</option>
+            <option>18h30</option><option>19h00</option>
+            <option>19h30</option><option>20h00</option>
+            <option>20h30</option><option>21h00</option>
+            <option>21h30</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Nombre de personnes</label>
+          <select id="f-pers">
+            <option>1 personne</option><option>2 personnes</option>
+            <option>3 personnes</option><option>4 personnes</option>
+            <option>5+ personnes</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>Remarques / Allergies</label>
+        <textarea id="f-notes" placeholder="Allergies, demandes particulières..."></textarea>
+      </div>
+
+      <button class="submit-btn" onclick="submitOrder()">✅ Confirmer ma commande</button>
+      <button class="cancel-btn" onclick="closeCheckout()">Annuler</button>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-modal">
+    <div class="success-icon">🎉</div>
+    <h3>Commande envoyée !</h3>
+    <p>Merci <strong id="success-name"></strong> ! Votre commande a bien été transmise au restaurant.<br><br>Vous recevrez une confirmation par email. À tout à l'heure !</p>
+    <a href="index.html" class="success-back">← Retour au site</a>
+  </div>
+</div>
+
+<script>
+  // ===== MENU DATA =====
+  const menu = {
+    entrees: [
+      { id:'e1', name:'Salade Olivier', desc:'Pommes de terre, carottes, petits pois, cornichons, mayo maison', price:7.5, badges:['pop'] },
+      { id:'e2', name:'Hareng sous un manteau', desc:'Hareng mariné, betterave, pomme de terre, carotte, mayo', price:8.0, badges:[] },
+      { id:'e3', name:'Salade de betterave', desc:'Betterave rôtie, noix, ail, huile de tournesol', price:6.5, badges:['vege'] },
+      { id:'e4', name:'Pampushky à l\'ail (4 pcs)', desc:'Petits pains moelleux dorés, beurre à l\'ail et herbes fraîches', price:5.0, badges:['vege'] },
+    ],
+    soupes: [
+      { id:'s1', name:'Bortsch ukrainien', desc:'Betterave, chou, carottes, viande de bœuf, crème fraîche', price:8.5, badges:['pop'] },
+      { id:'s2', name:'Solianka', desc:'Soupe épaisse aux viandes fumées, cornichons, olives, citron', price:9.0, badges:['chef'] },
+      { id:'s3', name:'Bouillon de poulet', desc:'Bouillon maison, vermicelles, légumes, herbes fraîches', price:7.0, badges:[] },
+      { id:'s4', name:'Kapustnyak', desc:'Soupe de chou fermenté, porc, millet, oignons dorés', price:8.0, badges:[] },
+    ],
+    plats: [
+      { id:'p1', name:'Varenyki maison (8 pcs)', desc:'Raviolis farcis pomme de terre & fromage, crème fraîche', price:13.0, badges:['pop'] },
+      { id:'p2', name:'Poulet Kiev', desc:'Escalope roulée au beurre aux herbes, pané doré, purée maison', price:16.5, badges:['chef'] },
+      { id:'p3', name:'Holubtsi (3 pcs)', desc:'Feuilles de chou farcies viande & riz, sauce tomate maison', price:14.0, badges:['pop'] },
+      { id:'p4', name:'Deruny (4 pcs)', desc:'Galettes de pomme de terre croustillantes, crème fraîche', price:12.0, badges:['vege'] },
+      { id:'p5', name:'Côte de porc à l\'ukrainienne', desc:'Côte marinée, grillée, légumes rôtis, sauce moutarde', price:17.0, badges:[] },
+      { id:'p6', name:'Pelmeni (10 pcs)', desc:'Petits raviolis bœuf & porc, bouillon ou beurre fondu', price:13.5, badges:[] },
+    ],
+    desserts: [
+      { id:'d1', name:'Medivnyk', desc:'Gâteau au miel et aux épices, crème fouettée', price:6.5, badges:['chef'] },
+      { id:'d2', name:'Varenyki aux cerises (6 pcs)', desc:'Raviolis sucrés aux cerises, sucre glace, crème fraîche', price:7.0, badges:['pop'] },
+      { id:'d3', name:'Syrniki (3 pcs)', desc:'Pancakes au fromage blanc, confiture de fruits rouges', price:6.0, badges:[] },
+    ],
+    boissons: [
+      { id:'b1', name:'Compote maison (50cl)', desc:'Boisson aux fruits de saison, servie fraîche', price:3.5, badges:['vege'] },
+      { id:'b2', name:'Eau minérale (50cl)', desc:'Plate ou gazeuse', price:2.0, badges:[] },
+      { id:'b3', name:'Jus de fruits', desc:'Orange, pomme ou multivitamines', price:2.5, badges:[] },
+      { id:'b4', name:'Café / Thé', desc:'Café espresso ou thé chaud', price:2.0, badges:[] },
+    ]
+  };
+
+  const badgeLabels = { pop: ['badge-pop','⭐ Populaire'], vege: ['badge-vege','🌿 Végé'], chef: ['badge-chef','👨‍🍳 Spécialité'] };
+
+  // Cart state
+  let cart = {};
+
+  // ===== BUILD MENU =====
+  function buildMenu() {
+    Object.entries(menu).forEach(([cat, items]) => {
+      const grid = document.getElementById('grid-' + cat);
+      items.forEach(item => {
+        const badgesHtml = item.badges.map(b => `<span class="dish-badge ${badgeLabels[b][0]}">${badgeLabels[b][1]}</span>`).join('');
+        grid.innerHTML += `
+          <div class="dish-card">
+            <div class="dish-card-body">
+              <div class="dish-card-top">
+                <span class="dish-name">${item.name}</span>
+                <span class="dish-price">${item.price.toFixed(2).replace('.',',')}€</span>
+              </div>
+              <div class="dish-desc">${item.desc}</div>
+              ${item.badges.length ? `<div class="dish-badges">${badgesHtml}</div>` : ''}
+            </div>
+            <div class="dish-card-footer">
+              <div class="qty-control" id="qc-${item.id}" style="display:none">
+                <button class="qty-btn" onclick="changeQty('${item.id}',-1)">−</button>
+                <span class="qty-num" id="qn-${item.id}">0</span>
+                <button class="qty-btn" onclick="changeQty('${item.id}',1)">+</button>
+              </div>
+              <button class="add-to-cart-btn" id="ab-${item.id}" onclick="addToCart('${item.id}')">
+                + Ajouter
+              </button>
+            </div>
+          </div>`;
+      });
+    });
+  }
+
+  // ===== CART LOGIC =====
+  function getAllItems() {
+    return Object.values(menu).flat();
+  }
+
+  function getItem(id) {
+    return getAllItems().find(i => i.id === id);
+  }
+
+  function addToCart(id) {
+    cart[id] = (cart[id] || 0) + 1;
+    document.getElementById('ab-' + id).style.display = 'none';
+    document.getElementById('qc-' + id).style.display = 'flex';
+    document.getElementById('qn-' + id).textContent = cart[id];
+    updateCart();
+  }
+
+  function changeQty(id, delta) {
+    cart[id] = Math.max(0, (cart[id] || 0) + delta);
+    if (cart[id] === 0) {
+      delete cart[id];
+      document.getElementById('qc-' + id).style.display = 'none';
+      document.getElementById('ab-' + id).style.display = 'flex';
+    } else {
+      document.getElementById('qn-' + id).textContent = cart[id];
+    }
+    updateCart();
+  }
+
+  function updateCart() {
+    const ids = Object.keys(cart);
+    const count = ids.reduce((s, id) => s + cart[id], 0);
+    const total = ids.reduce((s, id) => s + cart[id] * getItem(id).price, 0);
+
+    // Header badge
+    document.getElementById('header-badge').textContent = count;
+
+    // Sidebar cart
+    const cartItemsEl = document.getElementById('cart-items');
+    if (count === 0) {
+      cartItemsEl.innerHTML = `<div class="cart-empty"><span class="cart-empty-icon">🥣</span><p>Votre panier est vide.<br>Ajoutez des plats pour commencer !</p></div>`;
+      document.getElementById('cart-summary').style.display = 'none';
+      document.getElementById('checkout-btn').disabled = true;
+    } else {
+      cartItemsEl.innerHTML = ids.map(id => {
+        const item = getItem(id);
+        const lineTotal = (cart[id] * item.price).toFixed(2).replace('.',',');
+        return `<div class="cart-item">
+          <div class="cart-item-info">
+            <div class="cart-item-name">${item.name}</div>
+            <div class="cart-item-price">${item.price.toFixed(2).replace('.',',')}€ / unité</div>
+          </div>
+          <div class="cart-item-qty">
+            <button class="cart-qty-btn" onclick="changeQty('${id}',-1)">−</button>
+            <span class="cart-qty-num">${cart[id]}</span>
+            <button class="cart-qty-btn" onclick="changeQty('${id}',1)">+</button>
+          </div>
+          <span class="cart-item-total">${lineTotal}€</span>
+        </div>`;
+      }).join('');
+      document.getElementById('cart-summary').style.display = 'block';
+      document.getElementById('subtotal').textContent = total.toFixed(2).replace('.',',') + '€';
+      document.getElementById('total').textContent = total.toFixed(2).replace('.',',') + '€';
+      document.getElementById('checkout-btn').disabled = false;
+    }
+
+    // Mobile bar
+    const mobileBar = document.getElementById('mobile-cart-bar');
+    mobileBar.style.display = count > 0 ? 'flex' : 'none';
+    document.getElementById('mobile-count').textContent = count;
+    document.getElementById('mobile-total').textContent = total.toFixed(2).replace('.',',') + '€';
+  }
+
+  // ===== CHECKOUT =====
+  function openCheckout() {
+    if (Object.keys(cart).length === 0) return;
+    const ids = Object.keys(cart);
+    const total = ids.reduce((s, id) => s + cart[id] * getItem(id).price, 0);
+
+    document.getElementById('recap-items').innerHTML = ids.map(id => {
+      const item = getItem(id);
+      return `<div class="recap-item"><span>${cart[id]}× ${item.name}</span><span>${(cart[id]*item.price).toFixed(2).replace('.',',')}€</span></div>`;
+    }).join('');
+    document.getElementById('recap-total').textContent = total.toFixed(2).replace('.',',') + '€';
+    document.getElementById('checkoutOverlay').classList.add('active');
+  }
+
+  function closeCheckout() {
+    document.getElementById('checkoutOverlay').classList.remove('active');
+  }
+
+  function submitOrder() {
+    const prenom = document.getElementById('f-prenom').value.trim();
+    const nom    = document.getElementById('f-nom').value.trim();
+    const email  = document.getElementById('f-email').value.trim();
+    const tel    = document.getElementById('f-tel').value.trim();
+    const heure  = document.getElementById('f-heure').value;
+    const pers   = document.getElementById('f-pers').value;
+    const notes  = document.getElementById('f-notes').value.trim();
+
+    if (!prenom || !nom || !email || !tel || !heure) {
+      alert('Veuillez remplir tous les champs obligatoires (*).');
+      return;
+    }
+
+    // Build email body via mailto
+    const ids = Object.keys(cart);
+    const total = ids.reduce((s, id) => s + cart[id] * getItem(id).price, 0);
+
+    let body = `NOUVELLE COMMANDE À EMPORTER\n\n`;
+    body += `Client : ${prenom} ${nom}\n`;
+    body += `Email : ${email}\n`;
+    body += `Téléphone : ${tel}\n`;
+    body += `Heure de retrait : ${heure}\n`;
+    body += `Nombre de personnes : ${pers}\n\n`;
+    body += `--- COMMANDE ---\n`;
+    ids.forEach(id => {
+      const item = getItem(id);
+      body += `${cart[id]}× ${item.name} — ${(cart[id]*item.price).toFixed(2)}€\n`;
+    });
+    body += `\nTOTAL : ${total.toFixed(2)}€\n`;
+    if (notes) body += `\nREMARQUES : ${notes}\n`;
+
+    // ⚠️ Remplacez cette adresse par l'email du gérant
+    const restaurantEmail = 'contact@alamarmiteukrainienne.be';
+
+    const mailtoLink = `mailto:${restaurantEmail}?subject=Commande à emporter – ${prenom} ${nom} – ${heure}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoLink;
+
+    // Show success
+    setTimeout(() => {
+      closeCheckout();
+      document.getElementById('success-name').textContent = prenom;
+      document.getElementById('successOverlay').classList.add('active');
+      cart = {};
+      updateCart();
+      buildMenu(); // reset quantities
+    }, 500);
+  }
+
+  // ===== SCROLL TO CATEGORY =====
+  function scrollTo(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+  }
+
+  // Close checkout on overlay click
+  document.getElementById('checkoutOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeCheckout();
+  });
+
+  // ===== INIT =====
+  buildMenu();
+  updateCart();
+</script>
+</body>
+</html>
