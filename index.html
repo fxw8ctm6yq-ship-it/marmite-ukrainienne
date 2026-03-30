@@ -1092,6 +1092,153 @@
     @media (max-width: 768px) {
       .nav-mobile-btn { display: flex !important; }
     }
+    /* ===== AVIS ===== */
+    .avis { background: var(--cream); }
+
+    .avis-score {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .avis-score-main {
+      text-align: center;
+    }
+
+    .avis-score-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      color: var(--blue-dark);
+      line-height: 1;
+    }
+
+    .avis-stars { font-size: 1.5rem; margin: 0.3rem 0; }
+
+    .avis-score-label {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      font-style: italic;
+    }
+
+    .avis-platforms {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .avis-platform {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: white;
+      border-radius: 10px;
+      padding: 0.5rem 1rem;
+      border: 1px solid rgba(26,86,176,0.1);
+      font-size: 0.9rem;
+      color: var(--text-mid);
+    }
+
+    .avis-platform-name { font-weight: 600; color: var(--blue-dark); min-width: 100px; }
+    .avis-platform-score { color: var(--blue); font-weight: 700; margin-left: auto; }
+
+    .avis-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .avis-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      border: 1px solid rgba(26,86,176,0.1);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .avis-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(26,86,176,0.1);
+    }
+
+    .avis-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .avis-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .avis-author { font-weight: 600; color: var(--blue-dark); font-size: 0.95rem; }
+    .avis-date { font-size: 0.78rem; color: #aaa; font-style: italic; }
+    .avis-card-stars { font-size: 1rem; }
+
+    .avis-card-text {
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      line-height: 1.65;
+      font-style: italic;
+      flex: 1;
+    }
+
+    .avis-card-source {
+      font-size: 0.75rem;
+      color: #bbb;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      border-top: 1px solid rgba(26,86,176,0.07);
+      padding-top: 0.6rem;
+    }
+
+    .avis-cta {
+      text-align: center;
+      margin-top: 2.5rem;
+    }
+
+    .avis-cta a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 2rem;
+      background: var(--blue);
+      color: white;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: all 0.2s;
+      box-shadow: 0 4px 16px rgba(26,86,176,0.3);
+    }
+
+    .avis-cta a:hover { background: var(--blue-dark); transform: translateY(-2px); }
+
+    @media (max-width: 768px) {
+      .avis-grid { grid-template-columns: 1fr; }
+      .avis-score { gap: 1.5rem; }
+    }
+
   </style>
 </head>
 <body>
@@ -1514,153 +1661,6 @@
   </div>
 </section>
 
-    /* ===== AVIS ===== */
-    .avis { background: var(--cream); }
-
-    .avis-score {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
-      margin-bottom: 3rem;
-      flex-wrap: wrap;
-    }
-
-    .avis-score-main {
-      text-align: center;
-    }
-
-    .avis-score-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 4rem;
-      color: var(--blue-dark);
-      line-height: 1;
-    }
-
-    .avis-stars { font-size: 1.5rem; margin: 0.3rem 0; }
-
-    .avis-score-label {
-      font-size: 0.9rem;
-      color: var(--text-mid);
-      font-style: italic;
-    }
-
-    .avis-platforms {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-
-    .avis-platform {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      background: white;
-      border-radius: 10px;
-      padding: 0.5rem 1rem;
-      border: 1px solid rgba(26,86,176,0.1);
-      font-size: 0.9rem;
-      color: var(--text-mid);
-    }
-
-    .avis-platform-name { font-weight: 600; color: var(--blue-dark); min-width: 100px; }
-    .avis-platform-score { color: var(--blue); font-weight: 700; margin-left: auto; }
-
-    .avis-grid {
-      max-width: 1000px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-
-    .avis-card {
-      background: white;
-      border-radius: 16px;
-      padding: 1.5rem;
-      border: 1px solid rgba(26,86,176,0.1);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
-      transition: transform 0.2s, box-shadow 0.2s;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .avis-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 30px rgba(26,86,176,0.1);
-    }
-
-    .avis-card-header {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .avis-avatar {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: var(--blue);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-
-    .avis-author { font-weight: 600; color: var(--blue-dark); font-size: 0.95rem; }
-    .avis-date { font-size: 0.78rem; color: #aaa; font-style: italic; }
-    .avis-card-stars { font-size: 1rem; }
-
-    .avis-card-text {
-      font-size: 0.95rem;
-      color: var(--text-mid);
-      line-height: 1.65;
-      font-style: italic;
-      flex: 1;
-    }
-
-    .avis-card-source {
-      font-size: 0.75rem;
-      color: #bbb;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      border-top: 1px solid rgba(26,86,176,0.07);
-      padding-top: 0.6rem;
-    }
-
-    .avis-cta {
-      text-align: center;
-      margin-top: 2.5rem;
-    }
-
-    .avis-cta a {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.8rem 2rem;
-      background: var(--blue);
-      color: white;
-      border-radius: 50px;
-      text-decoration: none;
-      font-size: 1rem;
-      font-weight: 600;
-      transition: all 0.2s;
-      box-shadow: 0 4px 16px rgba(26,86,176,0.3);
-    }
-
-    .avis-cta a:hover { background: var(--blue-dark); transform: translateY(-2px); }
-
-    @media (max-width: 768px) {
-      .avis-grid { grid-template-columns: 1fr; }
-      .avis-score { gap: 1.5rem; }
-    }
-
 <!-- AVIS -->
 <section class="avis" id="avis">
   <h2 class="section-title">Nos <span>Avis</span></h2>
@@ -1712,38 +1712,11 @@
     </div>
     <div class="avis-card">
       <div class="avis-card-header">
-        <div class="avis-avatar" style="background:#2c6ed4;">S</div>
-        <div><div class="avis-author">Sophie & Rudi</div><div class="avis-date">Avis Google</div></div>
-      </div>
-      <div class="avis-card-stars">⭐⭐⭐⭐⭐</div>
-      <div class="avis-card-text">"Super moment partagé à la Marmite Ukrainienne ! Des plats typiques ukrainiens… un délice. On s'y sent accueilli comme chez des amis."</div>
-      <div class="avis-card-source">🔍 Google</div>
-    </div>
-    <div class="avis-card">
-      <div class="avis-card-header">
-        <div class="avis-avatar" style="background:#1a56b0;">P</div>
+        <div class="avis-avatar" style="background:#2c6ed4;">P</div>
         <div><div class="avis-author">Pierre L.</div><div class="avis-date">Avis Tripadvisor</div></div>
       </div>
       <div class="avis-card-stars">⭐⭐⭐⭐⭐</div>
       <div class="avis-card-text">"Le couple propriétaire nous accueille toujours comme si nous étions de la famille. La nourriture ukrainienne est délicieuse, la bière polonaise passe toute seule !"</div>
-      <div class="avis-card-source">✈️ Tripadvisor</div>
-    </div>
-    <div class="avis-card">
-      <div class="avis-card-header">
-        <div class="avis-avatar" style="background:#0d3a7a;">A</div>
-        <div><div class="avis-author">Arnaud M.</div><div class="avis-date">Avis Tripadvisor</div></div>
-      </div>
-      <div class="avis-card-stars">⭐⭐⭐⭐⭐</div>
-      <div class="avis-card-text">"Le patron est un passionné et aime présenter ses plats. La cuisine est bonne avec un excellent rapport qualité/prix. Ce restaurant est moins cher que ses concurrents et offre un large choix."</div>
-      <div class="avis-card-source">✈️ Tripadvisor</div>
-    </div>
-    <div class="avis-card">
-      <div class="avis-card-header">
-        <div class="avis-avatar" style="background:#2c6ed4;">J</div>
-        <div><div class="avis-author">Julie & amies</div><div class="avis-date">Avis Tripadvisor</div></div>
-      </div>
-      <div class="avis-card-stars">⭐⭐⭐⭐⭐</div>
-      <div class="avis-card-text">"Accueil du patron hyper sympa. Les plats sont bons, le goût est là et le patron aux petits soins pour ses clients. Je recommande vivement !"</div>
       <div class="avis-card-source">✈️ Tripadvisor</div>
     </div>
   </div>
