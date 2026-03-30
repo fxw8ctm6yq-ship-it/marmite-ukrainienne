@@ -388,27 +388,6 @@
       line-height: 1.5;
     }
 
-    .gallery-add-btn {
-      position: absolute;
-      bottom: 12px; right: 12px;
-      width: 36px; height: 36px;
-      background: var(--yellow);
-      border: none;
-      border-radius: 50%;
-      font-size: 1.3rem;
-      color: var(--blue-dark);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      transition: transform 0.2s;
-      line-height: 1;
-    }
-
-    .gallery-add-btn:hover { transform: scale(1.15); }
-
     .gallery-item-label {
       position: absolute;
       bottom: 0; left: 0; right: 0;
@@ -423,9 +402,6 @@
     }
 
     .gallery-item:hover .gallery-item-label { opacity: 1; }
-
-    /* hidden file input for image upload */
-    .file-input { display: none; }
 
     /* ===== SPECIALTIES ===== */
     .specialties {
@@ -907,72 +883,6 @@
     footer p { font-size: 0.9rem; line-height: 1.6; }
     footer a { color: var(--yellow); text-decoration: none; }
 
-    /* ===== UPLOAD MODAL ===== */
-    .upload-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.7);
-      z-index: 999;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .upload-overlay.active { display: flex; }
-
-    .upload-modal {
-      background: white;
-      border-radius: 20px;
-      padding: 2rem;
-      max-width: 420px;
-      width: 90%;
-      text-align: center;
-      border-top: 5px solid var(--yellow);
-      animation: modalIn 0.3s ease;
-    }
-
-    @keyframes modalIn {
-      from { transform: scale(0.85); opacity: 0; }
-      to   { transform: scale(1); opacity: 1; }
-    }
-
-    .upload-modal h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
-      color: var(--blue-dark);
-      margin-bottom: 0.5rem;
-    }
-
-    .upload-modal p { font-size: 0.95rem; color: var(--text-mid); margin-bottom: 1.5rem; }
-
-    .upload-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.8rem 2rem;
-      background: var(--yellow);
-      color: var(--blue-dark);
-      font-weight: 700;
-      border-radius: 30px;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: all 0.2s;
-      margin-bottom: 1rem;
-    }
-
-    .upload-label:hover { background: #ffe033; transform: translateY(-2px); }
-
-    .upload-close {
-      display: block;
-      margin-top: 0.5rem;
-      background: none;
-      border: none;
-      color: var(--text-mid);
-      cursor: pointer;
-      font-size: 0.9rem;
-      text-decoration: underline;
-    }
-
     /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
       nav { padding: 0.7rem 1rem; }
@@ -1339,8 +1249,7 @@
     Découvrez nos plats et notre ambiance en images.
   </p>
   <div class="gallery-grid" id="galleryGrid">
-    <!-- 6 placeholder slots -->
-  </div>
+      </div>
 </section>
 
 <!-- SPECIALTIES -->
@@ -1389,8 +1298,7 @@
 
   <div class="menu-inner">
 
-    <!-- ENTRÉES -->
-    <div class="menu-category">
+        <div class="menu-category">
       <div class="menu-category-title">
         <span class="menu-category-icon">🥗</span>
         <span class="menu-category-name">Entrées</span>
@@ -1430,8 +1338,7 @@
       </div>
     </div>
 
-    <!-- SOUPES -->
-    <div class="menu-category">
+        <div class="menu-category">
       <div class="menu-category-title">
         <span class="menu-category-icon">🍲</span>
         <span class="menu-category-name">Soupes</span>
@@ -1470,8 +1377,7 @@
       </div>
     </div>
 
-    <!-- PLATS -->
-    <div class="menu-category">
+        <div class="menu-category">
       <div class="menu-category-title">
         <span class="menu-category-icon">🍽️</span>
         <span class="menu-category-name">Plats principaux</span>
@@ -1526,8 +1432,7 @@
       </div>
     </div>
 
-    <!-- DESSERTS -->
-    <div class="menu-category">
+        <div class="menu-category">
       <div class="menu-category-title">
         <span class="menu-category-icon">🍰</span>
         <span class="menu-category-name">Desserts</span>
@@ -1567,8 +1472,7 @@
       </div>
     </div>
 
-    <!-- FORMULES -->
-    <div class="menu-formule">
+        <div class="menu-formule">
       <div class="menu-formule-card">
         <h4>Formule Midi</h4>
         <p>Soupe + Plat<br>ou Plat + Dessert</p>
@@ -1595,8 +1499,7 @@
   <h2 class="section-title">Nos <span>Actualités</span></h2>
   <div class="section-divider"><span class="section-divider-icon">📢</span></div>
   <div class="news-grid" id="newsGrid">
-    <!-- Example cards pre-loaded -->
-    <div class="news-card" data-id="demo1">
+        <div class="news-card" data-id="demo1">
       <div class="news-card-header">
         <span class="news-tag tag-fermeture">Fermeture</span>
         <span class="news-card-date">25 déc. 2025</span>
@@ -1832,20 +1735,8 @@
   <p style="margin-top:1rem; font-size:0.75rem; opacity:0.5;">© 2026 À La Marmite Ukrainienne · Tous droits réservés</p>
 </footer>
 
-
-<div class="upload-overlay" id="uploadOverlay">
-  <div class="upload-modal">
-    <h3>📸 Ajouter une photo</h3>
-    <p>Sélectionnez une image depuis votre appareil pour l'afficher dans la galerie.</p>
-    <label class="upload-label" for="fileInput">
-      📂 Choisir une image
-    </label>
-    <input type="file" accept="image/*" class="file-input" id="fileInput"/>
-    <button class="upload-close" onclick="closeModal()">Annuler</button>
-  </div>
-</div>
-
 <script>
+  // Navigation mobile
   function openMobileNav() {
     document.getElementById('mobileNav').classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -1856,13 +1747,13 @@
     document.body.style.overflow = '';
   }
 
-
+  // Galerie — génération des emplacements
+  const labels = [
     "Nos plats du jour", "Ambiance du restaurant", "Spécialités maison",
     "Événements & fêtes", "À emporter", "Desserts & douceurs"
   ];
 
   const grid = document.getElementById("galleryGrid");
-  let currentSlot = null;
 
   labels.forEach((label, i) => {
     const item = document.createElement("div");
@@ -1877,68 +1768,7 @@
     `;
     grid.appendChild(item);
   });
-
-  function openModal(index) {
-    currentSlot = index;
-    document.getElementById("uploadOverlay").classList.add("active");
-  }
-
-  function closeModal() {
-    document.getElementById("uploadOverlay").classList.remove("active");
-    currentSlot = null;
-    document.getElementById("fileInput").value = "";
-  }
-
-  document.getElementById("fileInput").addEventListener("change", function(e) {
-    const file = e.target.files[0];
-    if (!file || currentSlot === null) return;
-    const reader = new FileReader();
-    reader.onload = function(ev) {
-      const item = grid.children[currentSlot];
-      const placeholder = item.querySelector(".gallery-placeholder");
-      if (placeholder) placeholder.remove();
-      let img = item.querySelector("img.user-img");
-      if (!img) {
-        img = document.createElement("img");
-        img.className = "user-img";
-        item.insertBefore(img, item.firstChild);
-      }
-      img.src = ev.target.result;
-      closeModal();
-    };
-    reader.readAsDataURL(file);
-  });
-
-  document.getElementById("uploadOverlay").addEventListener("click", function(e) {
-    if (e.target === this) closeModal();
-  });
-
 </script>
 
-<!-- ===== GLORIAFOOD ===== -->
-<!-- 
-  INSTRUCTIONS POUR ACTIVER GLORIAFOOD :
-  1. Créez votre compte sur gloriafood.com
-  2. Dans votre tableau de bord Gloriafood → "Get the widget"
-  3. Copiez votre URL de commande (ex: https://ordering.gloriafood.com/restaurant-name)
-  4. Remplacez VOTRE_URL_GLORIAFOOD ci-dessous par cette URL
-  5. Optionnel : remplacez aussi le lien du bouton "#" par votre URL Gloriafood
--->
-<script>
-  // Remplacez cette URL par votre URL Gloriafood une fois le compte créé
-  var gloriaFoodUrl = 'VOTRE_URL_GLORIAFOOD';
-
-  // Met à jour le bouton commander dès que l'URL est configurée
-  if (gloriaFoodUrl !== 'VOTRE_URL_GLORIAFOOD') {
-    document.getElementById('gf-order-btn').href = gloriaFoodUrl;
-    document.getElementById('gf-order-btn').target = '_blank';
-  } else {
-    // Mode démo — affiche un message au clic
-    document.getElementById('gf-order-btn').addEventListener('click', function(e) {
-      e.preventDefault();
-      alert('La commande en ligne sera disponible très prochainement !');
-    });
-  }
-</script>
 </body>
 </html>
